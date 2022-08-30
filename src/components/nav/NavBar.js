@@ -49,7 +49,7 @@ export const NavBar = ({ clearUser, isAuthenticated }) => {
         </li>
       )} */}
 
-      {isAuthenticated ? (
+      {/* {isAuthenticated ? (
         <li className="navbar__item">
           <a className="navbar__link" href=" " onClick={handleLogout}>
             Logout
@@ -61,7 +61,7 @@ export const NavBar = ({ clearUser, isAuthenticated }) => {
             Login
           </Link>
         </li>
-      )}
+      )} */}
     </ul>
   );
 };
