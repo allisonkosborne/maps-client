@@ -3,7 +3,7 @@ import { useNavigate, useResolvedPath, Link } from "react-router-dom";
 import { PropsAndState } from "./components/PropsAndState";
 // import "./Home.css";
 import { useEffect, useState } from "react";
-import { getUserName } from "./components/monster_user/MonsterUserManager";
+import { getUserName } from "./modules/MonsterUserManager";
 
 export const Home = () => {
   const [users, setUsers] = useState([]);

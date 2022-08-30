@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SpeciesCard } from "./SpeciesCard.js";
-import { getAllSpecies, getSpecies, getSpeciesById } from "./SpeciesManager.js";
+import {
+  getAllSpecies,
+  getSpecies,
+  getSpeciesById,
+} from "../../modules/SpeciesManager.js";
 
 export const SpeciesList = () => {
   const [species, setSpecies] = useState([]);

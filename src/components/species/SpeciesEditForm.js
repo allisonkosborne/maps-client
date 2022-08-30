@@ -20,5 +20,13 @@ export const SpeciesEditForm = () => {
   const updateExistingSpecies = (evt) => {
     evt.preventDefault();
     setIsLoading(true);
+
+    const editedSpecies = {
+      id: speciesId,
+      name: species.name,
+      weapon: species.weapon,
+    };
+
+    updateExistingSpecies(editedSpecies).then(() => navigate("/"));
   };
 };
