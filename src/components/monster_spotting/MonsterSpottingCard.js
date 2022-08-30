@@ -1,12 +1,35 @@
 import React from "react";
 import "./MonsterSpotting.css";
 
-export const MonsterSpottingCard = () => (
-  <section className="spotting_card">
-    <h3 className="spotting__title">Monster Spotting Form</h3>
-    <div className="spotting__species">Species: Vampire</div>
-    <div className="spotting__date">Date: 11-22-2021</div>
-    <div className="spotting__time">Time: 04:00</div>
-    <div className="spotting__location">Location: Nashville</div>
-  </section>
-);
+export const MonsterSpottingCard =
+  () =>
+  ({ monsterspotting, handleDeleteMSpotting }) => {
+    return (
+      <div className="card">
+        <div className="card-content">
+          <style>
+            @import
+            url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Gloria+Hallelujah&display=swap');
+          </style>
+          <picture>Add picture icon here</picture>
+          <h3>
+            <span className="card-mspotting-name">
+              {monsterspotting.species}
+            </span>
+          </h3>
+          <p>User Id: {monsterspotting.date}</p>
+          <p>User Id: {monsterspotting.time}</p>
+          <p>User Id: {monsterspotting.location}</p>
+          <button
+            type="button"
+            onClick={() => handleDeleteMSpotting(monsterspotting.id)}
+          >
+            Delete
+          </button>
+          <Link to={`/monster_spottings/${monsterspotting.id}/update`}>
+            <button>Edit</button>
+          </Link>
+        </div>
+      </div>
+    );
+  };

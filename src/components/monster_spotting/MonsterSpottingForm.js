@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useNavigate } from "react-router-dom";
-import { getSpecies } from "../../modules/SpeciesManager.js";
-import {
-  createMonsterSpottings,
-  getGameTypes,
-} from "./modules/createMonsterSpottings.js";
+import { getSpecies, createSpecies } from "../../modules/SpeciesManager.js";
+import { createMonsterSpottings } from "../../modules/MonsterSpottingManager.js";
+// import {
+//   createMonsterSpottings,
+//   getGameTypes,
+// } from "./modules/MonsterSpottingManager.js";
 
 export const MonsterSpottingForm = () => {
   // const history = useHistory();
@@ -36,7 +37,7 @@ export const MonsterSpottingForm = () => {
     if (event.target.id.includes("Id")) {
       selectedVal = parseInt(selectedVal);
     }
-    newSpecies[event.target.id] = selectedVal;
+    newMonsterSpotting[event.target.id] = selectedVal;
     setMonsterSpotting(newMonsterSpotting);
   };
   useEffect(() => {
@@ -62,22 +63,28 @@ export const MonsterSpottingForm = () => {
       <h2 className="monsterSpotting__title">Register New Monster Spotting</h2>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="title">Title: </label>
+          <label htmlFor="name">New Monster Spotting:</label>
           <input
             type="text"
-            name="title"
+            id="name"
+            onChange={changeMonsterSpottingState}
             required
             autoFocus
             className="form-control"
-            value={monsterSpotting.title}
-            onChange={handleClickSaveMSForm}
+            placeholder="Seed name"
+            value={species.name}
           />
         </div>
       </fieldset>
+      <div className="container">
+        <button className="btn btn-primary" onClick={handleClickSaveMSForm}>
+          SOW
+        </button>
+      </div>
 
       {/* TODO: create the rest of the input fields */}
 
-      <button
+      {/* <button
         type="submit"
         onClick={(evt) => {
           // Prevent form from being submitted
@@ -98,7 +105,7 @@ export const MonsterSpottingForm = () => {
         className="btn btn-primary"
       >
         Create
-      </button>
+      </button> */}
     </form>
   );
 };
