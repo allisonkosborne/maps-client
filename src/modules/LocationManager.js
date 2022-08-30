@@ -1,5 +1,7 @@
-export const getMonsterSpottings = () => {
-  return fetch("http://localhost:8000/monster_spottings", {
+const remoteURL = "http://localhost:8000";
+
+export const getLocations = () => {
+  return fetch("http://localhost:8000/locations", {
     headers: {
       Authorization: `Token ${localStorage.getItem("lu_token")}`,
     },

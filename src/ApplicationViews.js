@@ -6,6 +6,7 @@ import { Home } from "./Home";
 import { SpeciesList } from "./components/species/SpeciesList";
 import { Login } from "./components/auth/Login";
 import { Register } from "./components/auth/Register";
+import { MonsterSpottingForm } from "./components/monster_spotting/MonsterSpottingForm";
 
 export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
   const PrivateRoute = ({ children }) => {
@@ -21,6 +22,12 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
   };
   return (
     <>
+      <main
+        style={{
+          margin: "5rem 2rem",
+          lineHeight: "1.75rem",
+        }}
+      ></main>
       <Routes>
         {/* Render the location list when http://localhost:3000/ */}
         <Route
@@ -50,6 +57,15 @@ export const ApplicationViews = ({ isAuthenticated, setIsAuthenticated }) => {
           element={
             <PrivateRoute>
               <SpeciesList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path="/monster_spotting"
+          element={
+            <PrivateRoute>
+              <MonsterSpottingForm />
             </PrivateRoute>
           }
         />

@@ -12,14 +12,14 @@ export const SpeciesList = () => {
 
   const navigate = useNavigate();
 
-  const getSpecies = () => {
-    return getAllSpecies().then((speciesfromAPI) => {
-      setSpecies(speciesfromAPI);
-    });
-  };
+  // const getSpecies = () => {
+  //   return getAllSpecies().then((speciesfromAPI) => {
+  //     setSpecies(speciesfromAPI);
+  //   });
+  // };
 
   useEffect(() => {
-    getSpecies();
+    getSpecies().then((data) => setSpecies(data));
   }, []);
 
   return (
