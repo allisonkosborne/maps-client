@@ -8,31 +8,46 @@ export const getSpecies = () => {
   }).then((response) => response.json());
 };
 
-export const getSpeciesById = () => {
+export const getSpeciesById = (id) => {
+  return fetch(`${remoteURL}/species/${id}`, {
+    headers: {
+      Authorization: `Token ${localStorage.getItem("lu_token")}`,
+    },
+  }).then((response) => response.json());
+};
+
+export const createSpecies = (newSpecies) => {
   return fetch("http://localhost:8000/species", {
+    method: "POST",
     headers: {
       Authorization: `Token ${localStorage.getItem("lu_token")}`,
+      "Content-Type": "application/json",
     },
+    body: JSON.stringify(newSpecies),
   }).then((response) => response.json());
 };
 
-export const createSpecies = () => {
-  return fetch("http://localhost:8000/species/create", {
+export const updateSpecies = (species) => {
+  return fetch(`${remoteURL}/species/${species.id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Token ${localStorage.getItem("lu_token")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(species),
+  }).then(getSpecies);
+};
+
+export const deleteSpecies = (id) => {
+  return fetch(`${remoteURL}/species/${id}`, {
+    method: "DELETE",
     headers: {
       Authorization: `Token ${localStorage.getItem("lu_token")}`,
     },
-  }).then((response) => response.json());
+  }).then(getSpecies);
 };
 
-export const updateSpecies = () => {
-  return fetch("http://localhost:8000/species", {
-    headers: {
-      Authorization: `Token ${localStorage.getItem("lu_token")}`,
-    },
-  }).then((response) => response.json());
-};
-
-export const deleteSpecies = () => {
+export const getSpeciesForMSpotting = () => {
   return fetch("http://localhost:8000/species", {
     headers: {
       Authorization: `Token ${localStorage.getItem("lu_token")}`,

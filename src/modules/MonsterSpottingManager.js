@@ -8,32 +8,39 @@ export const getMonsterSpottings = () => {
   }).then((response) => response.json());
 };
 
-export const createMonsterSpottings = () => {
+export const createMonsterSpottings = (newMSpotting) => {
   return fetch("http://localhost:8000/monster_spottings", {
+    method: "POST",
     headers: {
       Authorization: `Token ${localStorage.getItem("lu_token")}`,
+      "Content-Type": "application/json",
     },
+    body: JSON.stringify(newMSpotting),
   }).then((response) => response.json());
 };
 
-export const deleteMonsterSpottings = () => {
-  return fetch("http://localhost:8000/monster_spottings", {
+export const deleteMonsterSpottings = (id) => {
+  return fetch(`${remoteURL}/monster_spottings/${id}`, {
+    method: "DELETE",
     headers: {
       Authorization: `Token ${localStorage.getItem("lu_token")}`,
     },
-  }).then((response) => response.json());
+  }).then(getMonsterSpottings);
 };
 
-export const updateMonsterSpottings = () => {
-  return fetch("http://localhost:8000/monster_spottings", {
+export const updateMonsterSpottings = (mSpotting) => {
+  return fetch(`${remoteURL}/monster_spottings/${mSpotting.id}`, {
+    method: "PUT",
     headers: {
       Authorization: `Token ${localStorage.getItem("lu_token")}`,
+      "Content-Type": "application/json",
     },
-  }).then((response) => response.json());
+    body: JSON.stringify(mSpotting),
+  }).then(getMonsterSpottings);
 };
 
-export const getMonsterSpottingsById = () => {
-  return fetch("http://localhost:8000/monster_spottings", {
+export const getMonsterSpottingsById = (id) => {
+  return fetch(`${remoteURL}/monster_spottings/${id}`, {
     headers: {
       Authorization: `Token ${localStorage.getItem("lu_token")}`,
     },
