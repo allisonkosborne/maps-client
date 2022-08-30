@@ -1,9 +1,9 @@
-// import React from "react"
-// import "./Animal.css"
+import React, { useState, useEffect } from "react";
+// import CSS
+import { Link, useNavigate, Navigate } from "react-router-dom";
 
-// export const SpeciesCard = () => (
-//     <section className="species">
-//         <h3 className="animal__name">Doodles</h3>
-//         <div className="animal__breed">Breed: Poodle</div>
-//     </section>
-// )
+export const SpeciesCard = ({ species, handleDeleteSpecies }) => {
+  const sessionUser = JSON.parse(window.sessionStorage.getItem("maps_user"));
+  const sessionUserId = sessionUser.id;
+  const navigate = useNavigate();
+};

@@ -1,25 +1,32 @@
-import React from "react";
-import { MonsterSpottingCard } from "./monsterspotting/MonsterSpottingCard";
-import "./Maps.css";
+import React, { useState } from "react";
 import { NavBar } from "./nav/NavBar";
 import { ApplicationViews } from "../ApplicationViews";
+import "./Maps.css";
 
-export const Maps = () => (
-  <>
-    <NavBar />
-    <ApplicationViews />
-    {/* <h2>M.A.P.S.:</h2>
-    <small>Monster Amplitude and Paranormal Spectrums</small>
-    <div class="spotting_intro">
-      <div>Who have you seen *creeping* around the neighborhood?</div>
-      <div>Let us know!</div>
-    </div>
-    <PropsAndState yourName="Allison" />
-    <h2>Monsters</h2>
-    <article className="monster_spottings">
-      <MonsterSpottingCard />
-      <MonsterSpottingCard />
-      <MonsterSpottingCard />
-    </article> */}
-  </>
-);
+export const Maps = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    sessionStorage.getItem("maps_user") !== null
+  );
+
+  const setAuthUser = (user) => {
+    sessionStorage.setItem("maps_user", JSON.stringify(user));
+    setIsAuthenticated(sessionStorage.getItem("maps_user") !== null);
+  };
+
+  const clearUser = () => {
+    sessionStorage.clear();
+    setIsAuthenticated(sessionStorage.getItem("maps_user") !== null);
+  };
+
+  return (
+    <>
+      <NavBar clearUser={clearUser} isAuthenticated={isAuthenticated} />
+      {/* 2 Props (function from kennel and variable from state pf kennel) */}
+      <ApplicationViews
+        setAuthUser={setAuthUser}
+        isAuthenticated={isAuthenticated}
+        setIsAuthenticated={setIsAuthenticated}
+      />
+    </>
+  );
+};

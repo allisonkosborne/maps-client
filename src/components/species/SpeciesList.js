@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { getSpecies, getSpeciesById } from "./SpeciesManager.js";
+import { useNavigate } from "react-router-dom";
+import { SpeciesCard } from "./SpeciesCard.js";
+import { getAllSpecies, getSpecies, getSpeciesById } from "./SpeciesManager.js";
 
 export const SpeciesList = () => {
   const [species, setSpecies] = useState([]);
 
+  const navigate = useNavigate();
+
+  const getSpecies = () => {
+    return getAllSpecies().then((speciesfromAPI) => {
+      setSpecies(speciesfromAPI);
+    });
+  };
+
   useEffect(() => {
-    getSpecies().then((data) => setSpecies(data));
+    getSpecies();
   }, []);
 
   return (
