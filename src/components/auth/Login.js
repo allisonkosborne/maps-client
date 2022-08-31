@@ -1,80 +1,69 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import React, { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "./AuthManager";
 
-export const Login = ({ setAuthUser }) => {
-  const email = useRef();
-  const existDialog = useRef();
+export const Login = ({ setToken }) => {
+  const username = useRef();
+  const password = useRef();
   const navigate = useNavigate();
-
-  const existingUserCheck = () => {
-    return fetch(`http://localhost:3000/users?email=${email.current.value}`)
-      .then((res) => res.json())
-      .then((user) => (user.length ? user[0] : false));
-  };
+  const [isUnsuccessful, setisUnsuccessful] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    existingUserCheck().then((exists) => {
-      if (exists) {
-        setAuthUser(exists);
-        navigate("/");
+    const user = {
+      username: username.current.value,
+      password: password.current.value,
+    };
+
+    loginUser(user).then((res) => {
+      if ("valid" in res && res.valid) {
+        setToken(res.token);
+        navigate.push("/");
       } else {
-        existDialog.current.showModal();
+        setisUnsuccessful(true);
       }
     });
   };
 
   return (
-    <>
-      <main className="container--login">
-        <style>
-          @import
-          url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Gloria+Hallelujah&display=swap');
-        </style>
-        <dialog className="dialog dialog--auth" ref={existDialog}>
-          <div>User does not exist</div>
-          <button
-            className="button--close"
-            onClick={(e) => existDialog.current.close()}
-          >
-            Close
-          </button>
-        </dialog>
+    <section className="columns is-centered">
+      <form className="column is-two-thirds" onSubmit={handleLogin}>
+        <h1 className="title">M.A.P.S.</h1>
+        <p className="subtitle">Please sign in</p>
 
-        <section>
-          <form className="form--login" onSubmit={handleLogin}>
-            <h1>M.A.P.S.</h1>
-            <h2>Please sign in</h2>
-            <fieldset>
-              <label htmlFor="inputEmail"> Email address </label>
-              <div className="emailAddress">
-                <input
-                  ref={email}
-                  type="email"
-                  id="email"
-                  className="form-control"
-                  placeholder="Email address"
-                  required
-                  autoFocus
-                />
-              </div>
-            </fieldset>
-            <fieldset>
-              <div className="signButton">
-                <button className="signInButton" type="submit">
-                  Sign in
-                </button>
-              </div>
-            </fieldset>
-          </form>
-        </section>
-        <section className="link--register">
-          <Link to="/register">Not a member yet?</Link>
-        </section>
-      </main>
-    </>
+        <div className="field">
+          <label className="label">Username</label>
+          <div className="control">
+            <input className="input" type="text" ref={username} />
+          </div>
+        </div>
+
+        <div className="field">
+          <label className="label">Password</label>
+          <div className="control">
+            <input className="input" type="password" ref={password} />
+          </div>
+        </div>
+
+        <div className="field is-grouped">
+          <div className="control">
+            <button className="button is-link" type="submit">
+              Submit
+            </button>
+          </div>
+          <div className="control">
+            <Link to="/register" className="button is-link is-light">
+              Cancel
+            </Link>
+          </div>
+        </div>
+        {isUnsuccessful ? (
+          <p className="help is-danger">Username or password not valid</p>
+        ) : (
+          ""
+        )}
+      </form>
+    </section>
   );
 };
