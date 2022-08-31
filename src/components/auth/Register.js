@@ -10,7 +10,7 @@ export const Register = ({ setAuthUser }) => {
   const navigate = useNavigate();
 
   const existingUserCheck = () => {
-    return fetch(`http://localhost:8088/users?email=${email.current.value}`)
+    return fetch(`http://localhost:8000/users?email=${email.current.value}`)
       .then((res) => res.json())
       .then((user) => !!user.length);
   };
@@ -20,7 +20,7 @@ export const Register = ({ setAuthUser }) => {
 
     existingUserCheck().then((userExists) => {
       if (!userExists) {
-        fetch("http://localhost:8088/users", {
+        fetch("http://localhost:8000/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -44,57 +44,61 @@ export const Register = ({ setAuthUser }) => {
   };
 
   return (
-    <main style={{ textAlign: "center" }}>
-      <dialog className="dialog dialog--password" ref={conflictDialog}>
-        <div>Account with that email address already exists</div>
-        <button
-          className="button--close"
-          onClick={(e) => conflictDialog.current.close()}
-        >
-          Close
-        </button>
-      </dialog>
+    <>
+      <main style={{ textAlign: "center" }}>
+        <dialog className="dialog dialog--password" ref={conflictDialog}>
+          <div>Account with that email address already exists</div>
+          <button
+            className="button--close"
+            onClick={(e) => conflictDialog.current.close()}
+          >
+            Close
+          </button>
+        </dialog>
 
-      <form className="form--login" onSubmit={handleRegister}>
-        <h1 className="h3 mb-3 font-weight-normal">Please Register for SOWN</h1>
-        <fieldset>
-          <label htmlFor="firstName"> First Name </label>
-          <input
-            ref={firstName}
-            type="text"
-            name="firstName"
-            className="form-control"
-            placeholder="First name"
-            required
-            autoFocus
-          />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="lastName"> Last Name </label>
-          <input
-            ref={lastName}
-            type="text"
-            name="lastName"
-            className="form-control"
-            placeholder="Last name"
-            required
-          />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="inputEmail"> Email address </label>
-          <input
-            ref={email}
-            type="email"
-            name="email"
-            className="form-control"
-            placeholder="Email address"
-            required
-          />
-        </fieldset>
-        <fieldset>
-          <button type="submit"> Sign in </button>
-        </fieldset>
-      </form>
-    </main>
+        <form className="form--login" onSubmit={handleRegister}>
+          <h1 className="h3 mb-3 font-weight-normal">
+            Please Register for SOWN
+          </h1>
+          <fieldset>
+            <label htmlFor="firstName"> First Name </label>
+            <input
+              ref={firstName}
+              type="text"
+              name="firstName"
+              className="form-control"
+              placeholder="First name"
+              required
+              autoFocus
+            />
+          </fieldset>
+          <fieldset>
+            <label htmlFor="lastName"> Last Name </label>
+            <input
+              ref={lastName}
+              type="text"
+              name="lastName"
+              className="form-control"
+              placeholder="Last name"
+              required
+            />
+          </fieldset>
+          <fieldset>
+            <label htmlFor="inputEmail"> Email address </label>
+            <input
+              ref={email}
+              type="email"
+              name="email"
+              className="form-control"
+              placeholder="Email address"
+              required
+            />
+          </fieldset>
+          <fieldset>
+            <button type="submit"> Sign in </button>
+          </fieldset>
+        </form>
+      </main>
+    </>
   );
 };

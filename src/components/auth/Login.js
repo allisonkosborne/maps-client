@@ -28,51 +28,53 @@ export const Login = ({ setAuthUser }) => {
   };
 
   return (
-    <main className="container--login">
-      <style>
-        @import
-        url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Gloria+Hallelujah&display=swap');
-      </style>
-      <dialog className="dialog dialog--auth" ref={existDialog}>
-        <div>User does not exist</div>
-        <button
-          className="button--close"
-          onClick={(e) => existDialog.current.close()}
-        >
-          Close
-        </button>
-      </dialog>
+    <>
+      <main className="container--login">
+        <style>
+          @import
+          url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Gloria+Hallelujah&display=swap');
+        </style>
+        <dialog className="dialog dialog--auth" ref={existDialog}>
+          <div>User does not exist</div>
+          <button
+            className="button--close"
+            onClick={(e) => existDialog.current.close()}
+          >
+            Close
+          </button>
+        </dialog>
 
-      <section>
-        <form className="form--login" onSubmit={handleLogin}>
-          <h1>M.A.P.S.</h1>
-          <h2>Please sign in</h2>
-          <fieldset>
-            <label htmlFor="inputEmail"> Email address </label>
-            <div className="emailAddress">
-              <input
-                ref={email}
-                type="email"
-                id="email"
-                className="form-control"
-                placeholder="Email address"
-                required
-                autoFocus
-              />
-            </div>
-          </fieldset>
-          <fieldset>
-            <div className="signButton">
-              <button className="signInButton" type="submit">
-                Sign in
-              </button>
-            </div>
-          </fieldset>
-        </form>
-      </section>
-      <section className="link--register">
-        <Link to="/register">Not a member yet?</Link>
-      </section>
-    </main>
+        <section>
+          <form className="form--login" onSubmit={handleLogin}>
+            <h1>M.A.P.S.</h1>
+            <h2>Please sign in</h2>
+            <fieldset>
+              <label htmlFor="inputEmail"> Email address </label>
+              <div className="emailAddress">
+                <input
+                  ref={email}
+                  type="email"
+                  id="email"
+                  className="form-control"
+                  placeholder="Email address"
+                  required
+                  autoFocus
+                />
+              </div>
+            </fieldset>
+            <fieldset>
+              <div className="signButton">
+                <button className="signInButton" type="submit">
+                  Sign in
+                </button>
+              </div>
+            </fieldset>
+          </form>
+        </section>
+        <section className="link--register">
+          <Link to="/register">Not a member yet?</Link>
+        </section>
+      </main>
+    </>
   );
 };
