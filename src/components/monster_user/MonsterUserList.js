@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllMonsterUsers } from "./components/modules/getAllMonsterUsers/";
+import { getAllMonsterUsers } from "../modules/MonsterUserManager/getAllMonsterUsers";
 import { MonsterUserCard } from "./MonsterUserCard";
 
 export const MonsterUserList = () => {

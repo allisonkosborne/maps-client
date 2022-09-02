@@ -1,7 +1,7 @@
 const remoteURL = "http://localhost:8000";
 
 export const getMonsterSpottings = () => {
-  return fetch("http://localhost:8000/monster_spottings", {
+  return fetch("http://localhost:8000/spottings", {
     headers: {
       Authorization: `Token ${localStorage.getItem("token")}`,
     },
@@ -10,7 +10,7 @@ export const getMonsterSpottings = () => {
 
 export const createNewMonsterSpotting = (newMonsterSpotting) => {
   console.log("new m spotting test", [newMonsterSpotting]);
-  return fetch("http://localhost:8000/monster_spottings", {
+  return fetch("http://localhost:8000/spottings", {
     method: "POST",
     headers: {
       Authorization: `Token ${localStorage.getItem("token")}`,
@@ -22,7 +22,7 @@ export const createNewMonsterSpotting = (newMonsterSpotting) => {
 
 export const updateMonsterSpotting = (monsterSpotting) => {
   console.log("update monster spotting", { monsterSpotting });
-  return fetch(`${remoteURL}/monster_spottings/${monsterSpotting.id}`, {
+  return fetch(`${remoteURL}/spottings/${monsterSpotting.id}`, {
     method: "PUT",
     headers: {
       Authorization: `Token ${localStorage.getItem("lu_token")}`,
@@ -34,7 +34,7 @@ export const updateMonsterSpotting = (monsterSpotting) => {
 
 export const deleteMonsterSpotting = (id) => {
   console.log(id);
-  return fetch(`${remoteURL}/monster_spottings/${id}`, {
+  return fetch(`${remoteURL}/spottings/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Token ${localStorage.getItem("lu_token")}`,
@@ -43,7 +43,7 @@ export const deleteMonsterSpotting = (id) => {
 };
 
 export const getMonsterSpottingById = (id) => {
-  return fetch(`${remoteURL}/monster_spottings/${id}`, {
+  return fetch(`${remoteURL}/spottings/${id}`, {
     headers: {
       Authorization: `Token ${localStorage.getItem("lu_token")}`,
     },
