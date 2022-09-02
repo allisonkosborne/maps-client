@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "./AuthManager";
 
-export const Login = ({ setToken }) => {
+export const Login = ({ setToken, setUserId }) => {
   const username = useRef();
   const password = useRef();
   const navigate = useNavigate();
