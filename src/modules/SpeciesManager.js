@@ -28,7 +28,7 @@ export const updateSpecies = (species) => {
       Authorization: `Token ${localStorage.getItem("lu_token")}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(post),
+    body: JSON.stringify(species),
   }).then(getSpecies);
 };
 
