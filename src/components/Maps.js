@@ -1,32 +1,67 @@
 import React, { useState } from "react";
+import { Route, Navigate, Routes } from "react-router-dom";
+import { ApplicationViews } from "./auth/ApplicationViews";
 import { NavBar } from "./nav/NavBar";
-import { ApplicationViews } from "../ApplicationViews";
-import "./Maps.css";
+import { Login } from "./auth/Login";
+import { Register } from "./auth/Register";
 
 export const Maps = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    sessionStorage.getItem("maps_user") !== null
-  );
+  const [token, setTokenState] = useState(localStorage.getItem("token"));
 
-  const setAuthUser = (user) => {
-    sessionStorage.setItem("maps_user", JSON.stringify(user));
-    setIsAuthenticated(sessionStorage.getItem("maps_user") !== null);
-  };
-
-  const clearUser = () => {
-    sessionStorage.clear();
-    setIsAuthenticated(sessionStorage.getItem("maps_user") !== null);
+  const setToken = (newToken) => {
+    localStorage.setItem("token", newToken);
+    setTokenState(newToken);
   };
 
   return (
     <>
-      <NavBar clearUser={clearUser} isAuthenticated={isAuthenticated} />
-      {/* 2 Props (function from kennel and variable from state pf kennel) */}
-      <ApplicationViews
-        setAuthUser={setAuthUser}
-        isAuthenticated={isAuthenticated}
-        setIsAuthenticated={setIsAuthenticated}
-      />
+      <Routes>
+        {token ? (
+          <Route>
+            <Route
+              path=""
+              element={<NavBar />}
+              token={token}
+              setToken={setToken}
+            />
+
+            <Route path="" element={<ApplicationViews />} />
+          </Route>
+        ) : (
+          <Navigate to="/login" />
+        )}
+
+        {/* <Route path="/" element={<Login />} /> */}
+        <Route path="/login" exact>
+          <Route
+            path=""
+            element={<NavBar />}
+            token={token}
+            setToken={setToken}
+          />
+          <Route
+            path=""
+            element={<Login />}
+            token={token}
+            setToken={setToken}
+          />
+        </Route>
+
+        <Route path="/register" exact>
+          <Route
+            path=""
+            element={<NavBar />}
+            token={token}
+            setToken={setToken}
+          />
+          <Route
+            path=""
+            element={<Register />}
+            token={token}
+            setToken={setToken}
+          />
+        </Route>
+      </Routes>
     </>
   );
 };
